@@ -1,4 +1,5 @@
 /*
+two pointers
 leetcode 31 medium
 find the next permutation
 [5,4,7,5,3,2] -> [5,5,2,3,4,7]
@@ -32,3 +33,10 @@ public:
         }
     }
 };
+
+class Solution {
+    public:
+        int waysToSplitArray(vector<int>& arr){
+            
+        }
+}
