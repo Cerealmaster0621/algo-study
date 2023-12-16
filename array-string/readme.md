@@ -33,9 +33,9 @@ If we want the subarray of sum from index i to j, that would be prefix[j] - pref
 `it could also be prefix[j]-prefix[i-1] when i is not 0 (out of bounds).`
 ## How to build the prefix sum array
 
-|  Given an array nums,
-| 
-|  prefix = [nums[0]]
-| for (int i = 1; i < nums.length; i++)
-|   prefix.append(nums[i] + prefix[prefix.length - 1]) 
+`|  Given an array nums,`\
+`|`\
+`|  prefix = [nums[0]]`\
+`| for (int i = 1; i < nums.length; i++)`\
+`|   prefix.append(nums[i] + prefix[prefix.length - 1]) `\
 
