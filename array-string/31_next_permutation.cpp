@@ -33,10 +33,3 @@ public:
         }
     }
 };
-
-class Solution {
-    public:
-        int waysToSplitArray(vector<int>& arr){
-            
-        }
-}
