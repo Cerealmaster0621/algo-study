@@ -103,4 +103,6 @@ Every problems with these characteristics also can be solved with sliding window
 2. create the number of elements(sizes) in the given vector arr, denoted as n.
 3. Make outer loops for the all posible values iteration. mask or i variable from 0 to (1<<n)-1. Each value of mask represents a subset of the elements in arr. (if the size n = 3. all possible size of subsets is 2^3 = 8. Outer loop is iterating through entire subsets that can be created.
 4. For each beginning of the outer loop, initialize the empty vector called subset to store the current subset.
-5. 
+5. Make inner loop for the all elements from j = 0 to n-1, check if the jth bit of the mask is set(i.e., (mask>>i)&1 == 1). If it is set, add the corresponding element from nums to the set.
+6. Sort the subset to ensure that duplicate subsets are considered the same, and insert it in to the subset set.
+7. After processing all possible mask values, convert the set of subsets into a vector and return it.
