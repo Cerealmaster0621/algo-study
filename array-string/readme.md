@@ -106,3 +106,9 @@ Every problems with these characteristics also can be solved with sliding window
 5. Make inner loop for the all elements from j = 0 to n-1, check if the jth bit of the mask is set(i.e., (mask>>i)&1 == 1). If it is set, add the corresponding element from nums to the set.
 6. Sort the subset to ensure that duplicate subsets are considered the same, and insert it in to the subset set.
 7. After processing all possible mask values, convert the set of subsets into a vector and return it.
+
+## More common features related to Array-String
+
+### Substring Problems
+
+General way to solve the Substring Problems

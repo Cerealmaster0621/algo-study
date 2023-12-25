@@ -18,6 +18,21 @@ Explanation: There is a cycle in the linked list, where the tail connects to the
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+//fast/slow pointer
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        ListNode* fast = head;
+        ListNode* slow = head;
+        while(head != nullptr && head->next != nullptr){
+            fast = fast->next->next;
+            slow = slow->next;
+            if(fast == slow) return true;
+        }
+        return false;
+    }
+};
+//hashmap
 class Solution {
 public:
     bool hasCycle(ListNode *head) {

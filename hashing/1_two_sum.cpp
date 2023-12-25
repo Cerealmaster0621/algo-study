@@ -8,8 +8,6 @@ return hash_map[target-arr[i]],i
 class Solution {
 public:
     vector<int> twoSum(vector<int>& arr, int target) {
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
         unordered_map<int,int> hash_map;
         for(int i = 0; i<arr.size();i++){
             int diff = target-arr[i];

@@ -20,24 +20,3 @@ public:
         return false;
     }
 };
-
-class Solution {
-public: aaabb
-    int ans(string s, int k){
-        unordered_map<char,int> map;
-        int left = 0, ans;
-        for(int right = 0;right<s.size();right++){
-            map[s[right]]++;
-            while(map.size()>k){
-                map[s[left]]--;
-                if(map[s[left]]==0){
-                    map.erase(s[left]);
-                }
-                left--;
-            }
-            ans = max(ans,right-left+1);
-        }
-
-        return ans;
-    }
-}

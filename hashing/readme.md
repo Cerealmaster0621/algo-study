@@ -48,3 +48,10 @@ Sets also don't allow multiple instances of the same value. If same element `1` 
 ### Arrays as keys
 keys of has map has to be immutable, but Arrays also can be keys even if it is mutable. In C++, built-in implementations convert array to string, for example, `[1, 51, 163] -> "1,51,163"`.
 
+## Checking for existence
+
+If the algorithm running `if ... in ...`, consider using a hashmap or set.
+
+## Counting
+
+Counting is a very common pattern with hash maps. Using hashmap for counting frequency of things are pretty common. 
