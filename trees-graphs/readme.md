@@ -49,3 +49,48 @@ struct TreeNode{
 };
 ```
 
+# Binary trees - DFS
+
+Tree traversal is how we access the elements of a tree, and mandatory for solving tree problems.
+
+In linked list, we traversed a linked list using following code: 
+```c++
+int getSum(ListNode* head){
+    int sum = 0;
+    while(head!=nullptr){
+        sum+=head->val;
+        head = head->next;
+    }
+    return sum;
+}
+```
+
+in Linked list, we have the `head` variable referencing the node. We traversed entire node using the `->next` attribute.
+
+Traversing a binary tree follows the same idea. We start the `root` and traverse by using the child pointers `->left` and `->right`. However, unlike we did iteratively in Linked lists using loop(while), with **binary trees**, we usually do it **recursively**. 
+
+## Depth-first search DFS
+
+In a DFS, we prioritize depth by traversing as far as possible in one direction (until it reaches to the leaf node, let's say `->left` this time). when we meet the leaf node, we explore the right subtrees after that.
+
+Because we need to backtrack up the tree after reaching the end of a branch, DFS is typically implemented using **recursion**, but sometimes also looping over **stack** iteratively.
+
+### DFS code implementation
+
+```c++
+void dfs(TreeNode* root){
+    if(root == nullptr){
+        return;
+    }
+    dfs(root->left);
+    dfs(root->right);
+    return;
+}
+```
+
+The structure for performing a DFS is very similar to all problems. It goes follows:
+1. Handle all the base case(s), usually an empty tree(`node == nullptr`) is a base case.
+2. Do some logic for the current node
+3. Recursively call on the current node's children
+4. Return the answer
+
