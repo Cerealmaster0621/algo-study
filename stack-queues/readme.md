@@ -86,3 +86,96 @@ string.size();
 stack.empty();
 string.empty();
 ```
+
+# Queues
+
+Queue follows FIFO(first in first out).
+In a stack, elements are added and removed from the **same** side. In a queue, elements are added and removed from **opposite** sides. Like a stack, there are multiiple ways to implement a queue, but it is trickier to implement for maintaining good performance.
+Operations on the front of the array(adding or removal) are O(n). Adding a queue is **enqueue** and deletions are called **dequeue**. For O(1) of these operations, this will require more sophisticated implementation.
+
+## Queue using Doubly linked list
+
+If there is pointer to node, adding or deleting at that location is O(1).
+
+## Queue using deque
+
+Short for double-ended queue, and pronounced "deck". in a deque, you can add or delete elements from both ends.
+
+## Where to use?
+
+In algorithm problems, queues are less common, and more difficult in general. The most common use of a queue is BFS.
+
+## Interface guide
+
+```c++
+// Declaration: C++ supports multiple implementations, but we will be using
+// std::queue. Specify the data type
+queue<int> queue;
+
+// Enqueueing/adding elements:
+queue.push(1);
+queue.push(2);
+queue.push(3);
+
+// Dequeing/removing elements:
+queue.pop();
+
+// Check if empty
+queue.empty(); // false
+
+// Check element at front of queue (next element to be removed)
+queue.front(); // 2
+
+// Get size
+queue.size(); // 2
+```
+
+```c++
+
+// C++ DEQUE 
+deque<int> deque;
+
+//adding elements from front/back 
+deque.push_front(1);
+deque.push_back(2);
+deque.push_front(0);
+deque.push_back(3);
+
+//removing from front/back
+deque.pop_front();
+deque.pop_back();
+
+//size
+deque.size();
+
+//empty
+deque.empty();
+
+//indexing
+deque.at(2); //same as arr[2]
+
+//front/back
+deque.front();
+deque.back();
+```
+
+## Monotonic
+
+Monotonic stack or queue is one whose elements are always sorted. It can be sorted either ascending or descending. for example,
+given `stack = [1,5,8,15,23]`. you want to push 14 on to the stack. for maintaining the sorted stack, you need to first pop the 23 and 15 before pushing 14. after the operations, stack will look like `stack = [1,5,8,14]`.
+
+```c++
+Pseudo Code
+given an integer array nums
+
+stack = []
+for num in nums:
+    while stack.length>0 AND stack.top>=num:
+        stack.pop()
+    add some logic depends on algorithm
+    stack.push(num)
+```
+
+before pushing a num onto the stack, first check if the monotonic property would be violated, and pop elements until it meets the condition.
+
+when adding and deletion occures in both right places - and also sometimes need deletion or add from right, use **Deque** for efficient O(1) operations.

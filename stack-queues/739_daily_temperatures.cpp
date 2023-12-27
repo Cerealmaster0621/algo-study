@@ -1,5 +1,6 @@
 /*
 leetcode 739 medium
+handling elements in backward order should remind you of a stack.
 place the !stack.empty() prior to the stack.empty()
 logic.
 Vector-stack can be used as stacking index of vector
