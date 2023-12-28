@@ -215,6 +215,10 @@ struct TreeNode{
 
 //max depth using iterative
 int maxDepth(TreeNode* root){
+    //base cases
+    if(root == nullptr){
+        return 0;
+    }
     stack<pair<TreeNode*, int>> stack;
     int ans = 0;
     stack.push(pair(root, 1));
@@ -227,10 +231,42 @@ int maxDepth(TreeNode* root){
             stack.push(pair(node->left, depth+1));
         }
         if(node->right){
-            stack.push(pai(node->right, depth+1));
+            stack.push(pair(node->right, depth+1));
         }
     }
     return ans;
 }
 
+```
+
+> Important note about iterative implementations is that we are adding `node->left` before `node->right`, and popping from stack goes opposite. Thus, we are actually visiting the right subtree first. In the recursive implementations, we visited the left first. In this specific questions, order didn't matter but it is still good to understand that the visit order **opposite** the insertion order in iterative implementations.
+
+## Time and Space Complexity of Binary tree DFS
+
+The time and space complexity of tree questions is usually straightforward like - almost always O(n), since every node has to visited once, and at each node, O(1) of work is done. if more than O(1) work is done at each node, let's say O(k) work, then entire time complexity will be O(k*n).
+For space complexity, worst case would be when tree is just a straight line, so O(n). When tree is complete(all nodes have 0 or 2 children and each level except the last is full), then the space complexity is O(log n), but this is the best-case scenario.
+
+When changing **recursive** function to **iterative** in DFS binary tree, pseudo code follows: 
+```c++
+//use pair of stack to follow current node and information you want to check with (depth, value sum etc,,,)
+function(TreeNode* root) {
+    if(root == nullptr){
+        return baseCaseValue;
+    }
+    //more base cases here if needed
+    stack<pair<TreeNode*, infoType>> stack;
+    stack.push(pair(root, rootInfo));
+    while(!stack.empty()){
+        auto[node, val] = stack.top();//populate values from stack
+        stack.pop();//pop from here
+        //leaf logic or breakpoint logic if necessary
+        if(node->left != nullptr){//if left node exists logic
+            stack.push(pair(node->left, leftInfo));
+        }
+        if(node->right != nullptr){//if right node exists logic
+            stack.push(pair(node->right, rightInfo));
+        }
+    }
+    return something;
+}
 ```
