@@ -94,3 +94,143 @@ The structure for performing a DFS is very similar to all problems. It goes foll
 3. Recursively call on the current node's children
 4. Return the answer
 
+> However, depends on some questions, Step 2 and 3 may happen in different orders. 
+
+The most important thing to understand is that each function calls focused on a **subtree**. if there are some logic added on step 2, that will be equally adapted in entire tree, however, step 2 itself is used for solving smaller sections(subtrees). You gradually build up the solution to the larger problem. So, this logic differs to the problem.
+
+There are three types of DFS. Each of the tree types differs only in the order they execute steps 2 and 3.
+
+## Three types of DFS traversal
+
+### Preorder traversal
+
+![image](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Binary_tree_v2.svg/1126px-Binary_tree_v2.svg.png)
+
+When logic is done on the current node **BEFORE** moving to the children, let's say this time we just want to print the value of each node in the tree to the console,
+
+```c++
+void preorderdfs(TreeNode* root){
+    if(root == nullptr){
+        return;
+    }
+    cout<<root->val<<endl;
+    preorderdfs(root->left);
+    preorderdfs(root->right);
+    return;
+}
+```
+
+In this example, we would see the nodes printed in this order : `1, 7, 2, 6, 5, 11, 9, 9, 5`
+
+Because the logic(printing) is done immediately at the start of each function call, preorder handles nodes in the **same order** that the function calls happen.
+
+### Inorder traversal
+
+For inorder traversal, we first incursively call the left child, then perform logic(printing) on the current node, and then recursively call the right child. This means no logic will be done until we reach a node without a left child because it doesn't get called until we reach to the left end.
+
+```c++
+void inorderdfs(TreeNode* root){
+    if(root == nullptr){
+        return;
+    }
+    inorderdfs(root->left);
+    cout<<root->val<<endl;
+    inorderdfs(root->right);
+    return;
+}
+```
+
+In this example, we would see the nodes printed in this order : `2 7 5 6 11 1 9 9 5`.
+
+Notice that for any given node, it's value is not printed until all values in the left subtree are printed, and right subtree are not printed until after that.
+
+### Postorder traversal
+
+In postorder traversal, we recursively call on the children first and then perform logic on the current node. This means no logic will be done until we reach a leaf node since calling on the children takes priioriy over performing logic. `The last logic will be done in root`.
+
+```c++
+void postorderdfs(TreeNode* root){
+    if(root == nullptr){
+        return;
+    }
+    postorderdfs(root->left);
+    postorderdfs(root->right);
+    cout<<root->val<<endl;
+    return;
+}
+```
+
+Running the above code will be printed:
+`2 5 11 6 7 5 9 9 1`
+
+`
+pre -> starting from node, logic will be worked on calling every left childs => right childs after that.
+
+in -> starting from left end leaf child, after every node in next left has excecuted, right will be excecuted from top to bottom.
+
+post -> edges are all called first, when edges have common parent, after two edges called, parents will be called.
+`
+
+## Solving problems with DFS
+
+Most of the questions don't even require to use adequate traversal methods. Important thing is to traverse around every nodes.
+
+### Finding the depth of Binary tree using DFS
+
+When recursive function is returning something, you can also allocate recursive function to the variable. in leetcod 104. Maximum Depth of Binary Tree problems, where you have to write function that returns the maximum depth, you can allocate recursive function in the variable left and right. 
+```c++
+int maxDepth(TreeNode* root){
+    //base cases where root is nullptr
+    if(root == nullptr){
+        return 0;
+    }
+    int left = maxDepth(root->left);
+    int right = maxDepth(root->right);
+    // return max + 1 because of requirements on 
+    // questions
+    return max(left, right) +1;
+}
+```
+
+This solution is doing a **postorder** traversal because the logic for the current node(max() function) happens after the calls.
+
+## DFS iterative implementation
+
+All three types of DFS can be implemented iteratively, but postorder and inorder are more complicated to implement than preorder. However, most of the problems doesn't require specific type of DFS.
+
+For iterative DFS implementation, we use a stack. We don't return values to store the depths just like we did on recursive, so instead we bind the current Node - current depth on the stack. in C++, `stack<pair<TreeNode*, int>>` will do it.
+
+In this implementation, we will use the **preorder** DFS instead of postorder since in/post order implementation in iteratives are harder than recursive.
+
+```c++
+//implementation on TreeNode from most of the problems
+struct TreeNode{
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode():val(0),left(nullptr),right(nullptr){}
+    TreeNode(int val):val(val),left(nullptr),right(nullptr){}
+    TreeNode(int val, TreeNode* left, TreeNode* right):val(val), left(left), right(right){}
+};
+
+//max depth using iterative
+int maxDepth(TreeNode* root){
+    stack<pair<TreeNode*, int>> stack;
+    int ans = 0;
+    stack.push(pair(root, 1));
+    while(!stack.empty()){
+        auto [node, depth] = stack.top();
+        stack.pop();
+        ans = max(ans, depth);
+
+        if(node->left){
+            stack.push(pair(node->left, depth+1));
+        }
+        if(node->right){
+            stack.push(pai(node->right, depth+1));
+        }
+    }
+    return ans;
+}
+
+```
