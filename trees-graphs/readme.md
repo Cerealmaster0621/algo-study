@@ -270,3 +270,72 @@ function(TreeNode* root) {
     return something;
 }
 ```
+
+# Binary trees - BFS
+
+In DFS, we prioritized depth. In breadth-first search (BFS), we prioritize breadth. In BFS, we traverse all nodes at a given depth before moving on to the next depth.
+
+While DFS was implemented using a stack(recursive uses a stack under the hood), **BFS** is implemented **iteratively** with a **queue**.
+
+## When to use BFS vs DFS?
+
+In DFS, the important thing was that you just visit all nodes. preorder, inorder or postorder was crucial to know how it works but not important in solving questions.
+
+In Binary tree problems, BFS is usually more efficient than DFS
+
+### Main disadvantages of DFS
+
+The main disadvantage of DFS is that you could end up wasting a lot of time looking for a value. when tree is **huge**, it could be inefficient because you have to search the entire left subtree, which could be milions of operations.
+
+### Main disadvantages of BFS
+
+The main disadvantage of BFS is that when the value is likely to be located bottom of the tree, you will waste a lot of time looking for a value.
+
+### Space complexity comparison
+
+DFS uses space linear with the height of the tree(the maximum depth), whereas BFS uses space linear with the level that has the most nodes. It depends on how tree looks like. 
+For example, in **perfect binary tree**, DFS use O(log n) space, whereas BFS use O(n). The final level in a perfect binary tree has n/2 nodes, but the tree only has the depth of logn.
+
+however, if the tree looks like lopsided(straight line), BFS will have O(1) space complexity while DFS have O(n).
+
+## BFS code implementation
+
+BFS implementations are very similar across different problems.
+
+```c++
+void bfs(TreeNode* root){
+    queue<TreeNode*> queue;
+    queue.push(root);
+    //every first lines of while loop, queue contains every nodes of current depth.
+    while(!queue.empty()){
+        int n = queue.size();//current depth
+        //some logic for current depth level
+        while(n--){
+            TreeNode* node = queue.front();
+            queue.pop();
+            //some logic for current node
+            if(node->left != nullptr){
+                queue.push(node->left);
+            }
+            if(node->right != nullptr){
+                queue.push(node->right);
+            }
+        }
+        //if there are ans vector or cnt variables to update, do it after depth iteration
+    }
+}
+```
+
+# Binary search Trees
+
+BST is a type of binary tree. BST has the following property:
+
+> For each node, all values in its left subtree are less than the value in the node, and all values in its right subtree are greater than the value in the node.
+
+![image](https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Binary_search_tree.svg/1920px-Binary_search_tree.svg.png)
+
+In this example of BST, let's say we want to find 7. value of root node is 8, so 7 is smaller than the value, so ignore right. next is 3, 7 is greater than 3 so ignore left and go right. same as 6, 7 is greater than 6 so go right. We found the 7.
+
+This process has an average time complexity of O(logn). In the worst case scenario, let's say if the tree is linear(basically linked list, just straight line), the time complexity would be O(n).
+
+If you perform **inorder DFS** with BST, you will traverse in **sorted order**.
