@@ -339,3 +339,21 @@ In this example of BST, let's say we want to find 7. value of root node is 8, so
 This process has an average time complexity of O(logn). In the worst case scenario, let's say if the tree is linear(basically linked list, just straight line), the time complexity would be O(n).
 
 If you perform **inorder DFS** with BST, you will traverse in **sorted order**.
+
+# Graphs
+
+A graph is any collection of nodes and connections between the nodes.
+
+> Another term for nodes is verticies, and the connection between nodes are called edges.
+
+Binary tree is also a graph, but they just have lots of restrictions.
+
+## Graph terminology
+
+Edges of a node can be either directed or undirected. When there are directed connection between `A` and `B` such as, `A->B`, you can move from `A` to `B`, but not `B` to `A`. Undirected edges mean you can move either way.
+
+Another important term as directed/undirected is connected component. Connected components are the groups of nodes that are connected by edges.
+
+> For example, binary tree have only one connected components, because every nodes are reachable from the root component.
+
+![img](https://qph.cf2.quoracdn.net/main-qimg-0563516a0d43b1653e59ce5c838d9b46)
