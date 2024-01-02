@@ -344,7 +344,7 @@ If you perform **inorder DFS** with BST, you will traverse in **sorted order**.
 
 A graph is any collection of nodes and connections between the nodes.
 
-> Another term for nodes is verticies, and the connection between nodes are called edges.
+> Another term for nodes is vertex(verticies), and the connection between nodes are called edges.
 
 Binary tree is also a graph, but they just have lots of restrictions.
 
@@ -357,3 +357,59 @@ Another important term as directed/undirected is connected component. Connected 
 > For example, binary tree have only one connected components, because every nodes are reachable from the root component.
 
 ![img](https://qph.cf2.quoracdn.net/main-qimg-0563516a0d43b1653e59ce5c838d9b46)
+
+In this following graph, vertex 4 has 3 **outdegrees** and 3 **indegrees**. 
+vertex 7 has 2 **indegrees**, which is 4 and 5, and 1 **outdegrees**, which is 6. Vertex 7 itself is called **degree** in this case.
+
+Nodes that are connected by the edges are called **neighbors**.
+
+A graph can be either **cyclic** or **Acyclic**.
+Not every verticies has to be connected for Cyclic graph. If the part of graph forms cycle, it is called **cyclic**.
+
+## How are graphs given in the problems?
+
+Unlike the Linked List or Binary tree problems, where head or root of the points are given, and it actually exists in the memory, graph problems are mostly abstract and doesn't really exist in real memories. 
+Many times, nodes of a graph is labeled like `0` to `n-1`. Sometimes there might be a story, and you need to determine yourself that it is a graph problem.
+
+With binary trees, traversal was easy because we only needed to care about node->left or node->right. 
+In graph traversal, we need to do some preworks before traversal, making sure that we can access to any given `node` and it's neighbors.
+
+### First input format : array of edges
+
+In this input format, the input will be the 2D array. edges between two nodes going to be like `[x,y]`, which indicates that there is an edge between `x` and `y`. It can be directed or undirected. 
+
+At every node, we would need to iterate over entire input to find the neighbors, and it is very slow. Instead, we use the data structure of Hash map of key for node, value for array of neighbors. 
+
+>simple implementation in graph_array_of_edges.cpp in this directory.
+
+### Second input format : adjacency list
+
+In an adjacency list, the nodes will be numbered from 0 to n-1. The input will be a 2D integer array, and adjacency list will be printed like
+`[[0th outgoing edges],[1st outgoing edges],,,,[n-1st outgoing edges]]`
+We don't need preprocessing from this input format, since we can access to any neighbors with the adjacency list. Remember, **proprocessing** is necessary for making list of any possible neighbors we can access.
+
+### Third input format : adjacency matrix
+
+Adjacency matrix is a 2D square **n*n** shaped matrix. if graph[i][j] == 1, that means there is an outgoing edge from node i to node j.
+Alternatively, you can **preprocess** the graph as we did with an array of edges. Build a hashmap and iterate over the entire graph. If graph[i][j] == 1, then perform `map[i].push_back(j)`. this way, when performing the traversal, you will not need to iterate n times at every node, instead, you can find neighbors from the map, which takes only O(1). This is especially useful when nodes have only a few neighbors and n is large.
+
+Both of these approaches will have a time complexity of **O(n^2)**, since they all have to iterate entire map at least once.
+
+### Last input format : matrix
+
+This format is more subtle but very common. The input is going to be 2D matrix and the problem will describe how this matrix formed like. For example, "Each square of the matrix is a village, Villages trade with their neighboring villages, which are the villages directly above, to the left, to the right, or below them."
+
+In this case, each square `(row, col)` of the matrix is a node, and the neighbors are `(row -1, col), (row, col -1), (row + 1, col), (row, col + 1)` (if in bounds).
+
+## Code differences between graphs and trees
+
+
+
+# Graph - DFS
+
+## connected components
+
+Just like leetcode 547 problems, one part of the graph problem is when they ask you connected components(nodes). When graph is undirected, a DFS from any given node will visit every nodes in component that they belongs to. to avoid cycle when traversing, we need to use a `hash set` to track which nodes we have already visited. After traversal, every nodes in the component will be marked in the has
+
+
+
