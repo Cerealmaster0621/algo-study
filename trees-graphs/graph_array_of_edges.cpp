@@ -24,3 +24,31 @@ int main(void){
         cout<<endl;
     }
 }
+
+//dfs recursive in graph
+void dfs_recursive(int node, unordered_map<int,vector<int>>& graph, unordered_set<int>& seen){
+    for(auto neighbor : graph[node]){
+        if(!seen[neighbor]){
+            seen.insert(neighbor);
+            dfs_recursive(neighbor, graph, seen);
+        }
+    }
+}
+
+
+//dfs iterative in graph
+void dfs_iterative(int node, unordered_map<int,vector<int>>& graph,unordered_set<int>& seen){
+    stack<int> stack;
+    stack.push(node);
+
+    while(!stack.empty()){
+        int node = stack.top();
+        stack.pop();
+        for(auto neighbor : graph[node]){
+            if(!seen[neighbor]){
+                seen.insert(neighbor);
+                stack.push(neighbor);
+            }
+        }
+    }
+}
