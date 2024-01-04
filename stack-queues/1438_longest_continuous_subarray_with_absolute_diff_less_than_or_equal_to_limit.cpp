@@ -5,6 +5,9 @@ necessary.
 sliding window + two deque for decreasing/inc-
 reasing order. compare front value of decreasing
 and increasing, update answer with length(right-left+1)
+in this question, pop/push back used for 
+updating deque monotonic features(decrease/increase)
+pop/push front used for compare numbers distances
 Example 1
 Input: nums = [8,2,4,7], limit = 4
 Output: 2 

@@ -32,3 +32,23 @@ public:
         return ans;
     }
 };
+
+//dividing seperate function is faster
+class Solution {
+public:
+    vector<int> ans;
+    void dfs(TreeNode* root){
+        if(root == nullptr){
+            return;
+        }
+        dfs(root->left);
+        ans.push_back(root->val);
+        dfs(root->right);
+        return ;
+    }
+
+    vector<int> inorderTraversal(TreeNode* root) {
+        dfs(root);
+        return ans;
+    }
+};

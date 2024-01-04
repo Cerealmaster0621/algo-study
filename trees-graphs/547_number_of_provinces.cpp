@@ -1,6 +1,9 @@
 /*
 leetcode 547 medium
 component problem
+Adjacency list need modification for solving problem
+with hashmap etc
+
 1. from adjacency list mark in hashmap entire neighbors on that node.
 (make graph less abstract)
 2. use dfs function to mark every neighbors in the hashset 

@@ -409,7 +409,7 @@ In this case, each square `(row, col)` of the matrix is a node, and the neighbor
 
 ## connected components
 
-Just like leetcode 547 problems, one part of the graph problem is when they ask you connected components(nodes). When graph is undirected, a DFS from any given node will visit every nodes in component that they belongs to. to avoid cycle when traversing, we need to use a `hash set` to track which nodes we have already visited. After traversal, every nodes in the component will be marked in the has
+Just like leetcode 547 problems, one part of the graph problem is when they ask you connected components(nodes). When graph is undirected, a DFS from any given node will visit every nodes in component that they belongs to. to avoid cycle when traversing, we need to use a `hash set` to track which nodes we have already visited. After traversal with DFS, every nodes in the component will be marked in the hashset `seen`, every nodes we have already visited.
 
-
+Before actually starting traversal, first build a graph that is easily accessible from any given neighbors. In C++, use hashmap of key `index` and value for `vector<int>` to store every neighbors related to the index. 
 

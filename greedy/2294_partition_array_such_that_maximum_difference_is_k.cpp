@@ -12,8 +12,8 @@ move left to the right
 class Solution {
 public:
     int partitionArray(vector<int>& nums, int k) {
-        //12356     5 4 2
-        //1 2 3     3 2 3
+        //12356
+        //1 2 3
         sort(nums.begin(), nums.end());
         int left = 0, right = 0, ans = 1;
         while(right < nums.size()){
