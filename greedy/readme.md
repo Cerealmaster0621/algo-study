@@ -18,3 +18,6 @@ Greedy isn't a datastructure and it isn't any single algorithm either, but more 
 
 # Example greedy problems
 
+Core concept of the greedy algorithm is that it has to be ensured that smaller chunks of procedure can solve the bigger problems.
+
+1. Approximation Algorithm
