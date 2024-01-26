@@ -413,3 +413,35 @@ Just like leetcode 547 problems, one part of the graph problem is when they ask 
 
 Before actually starting traversal, first build a graph that is easily accessible from any given neighbors. In C++, use hashmap of key `index` and value for `vector<int>` to store every neighbors related to the index. 
 
+# Graph - BFS
+
+## Bidirectional Search
+
+Bidirectional Search is a BFS way of graph approaching used when
+1. Both initial and goal states are unique and completely defined.
+2. The branching factor is exactly the same in both directions.
+The goal to use this Bidirectional search is to find the shortest path between a source and destination node. Basically, it operates by essentially running to simultaneous BFS, one from each node. When their searches collide, we have found a path.
+
+# Topological Sort
+
+## DAG - Directed Acyclic Graph
+![img](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Tred-G.svg/1024px-Tred-G.svg.png)
+A Directed Acyclic Graph is a graph that starts with node A and ends with E. If the graph has the cycle or is not directed, it is not DAG and topological sort is not possible either.
+
+## How to implement Topological sort? - Kahn's Algorithm
+
+What we have as a input is a Directed Acyclic Graph that some node has **0 Indegree** and some **0 Outdegree**. 
+First, we will count every node's Indegrees. After that, we will look up for the node that has 0 Indegree. In the above DAG example, that would be `A`. Then, we pop `A` from the graph, and enqueue `A` to the queue. After pop from the graph, we have to update every indegrees value since we don't have `A` from the graph anymore. Any nodes that had `A` as an Indegree has to be updated. After that, we will do the same procedure(Find the node where it's Indegree is 0, pop it, push to queue and update the outdegree's Indegree value) until we face the node that has 0 Indegree **AND** 0 Outdegree. That would be `E` in the above example.
+```c++
+function TopologicalSort( Graph G ):
+  for each node in G:
+    calculate the indegree
+  start = Node with 0 indegree
+  G.remove(start)
+  topological_list = [start]
+  While node with O indegree present:
+    topological_list.append(node)
+    G.remove(node)
+    Update Indegree of present nodes
+  Return topological_list
+```
