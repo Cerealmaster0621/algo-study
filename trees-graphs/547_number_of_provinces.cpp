@@ -11,41 +11,36 @@ with hashmap etc
 
 */
 
+#include<bits/stdc++.h>
+
 class Solution {
 public:
-    //
-    void dfs(unordered_map<int,vector<int>>& map, unordered_set<int>& set, int node){
-        //mark every neighbors in map[node] in set
-        //you don't need breakpoint since for loop 
-        //has the limitation itself.
-        for(int i : map[node]){
-            if(set.find(i)==set.end()){
-                set.insert(i);
-                dfs(map,set,i);
-            }
-        }
-    }
-
-    int findCircleNum(vector<vector<int>>& isConnected) {
-        unordered_map<int, vector<int>> map;
-        //1.visualize graph
-        for(int i = 0; i<isConnected.size();i++){
-            for(int j = 0; j<isConnected[i].size();j++){
-                if(isConnected[i][j] == 1){
+    unordered_map<int,vector<int>> map;
+    unordered_map<int> set;
+    int findCircleNum(vector<vector<int>>& arr) {
+        for(int i = 0; i<arr.size();i++){
+            for(int j = i+1; j<arr[i].size();j++){
+                if(arr[i][j] == 1){
                     map[i].push_back(j);
                     map[j].push_back(i);
                 }
             }
-        }    
-        //2. use dfs for marking every neighbors in set
-        unordered_set<int> set;
+        }
         int ans = 0;
-        for(auto& i : map){
-            if(set.find(i.first)==set.end()){
+        for(int i = 0; i<arr.size();i++){
+            if(set.find(i)==set.end()){
                 ans++;
-                dfs(map,set,i.first);
+                dfs(i);
             }
         }
         return ans;
+    }
+    void dfs(int index){
+        set.insert(index);
+        for(int i : map[index]){
+            if(set.find(i) == set.end()){
+                dfs(i);
+            }
+        }
     }
 };
